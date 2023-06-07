@@ -11,13 +11,11 @@ def json_to_csv(json_data, csv_path):
     with open(csv_path, 'w', newline='') as csv_file:
         writer = csv.writer(csv_file)
 
-        # Spaltenüberschriften aus den Schlüsseln des ersten JSON-Objekts erstellen
-        headers = list(data[0].keys())
-        writer.writerow(headers)
-
         # Daten aus JSON in CSV schreiben
         for item in data:
-            writer.writerow(list(item.values()))
+            writer.writerow(item)
 
+def read_json():
+    json_file
 
 
