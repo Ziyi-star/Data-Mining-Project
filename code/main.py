@@ -1,4 +1,4 @@
-import ...code.datasets.convertData.py
+from datasets.convertData import json_to_csv
 
 
 if __name__ =='__main__':
