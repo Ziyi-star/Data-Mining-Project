@@ -1,6 +1,10 @@
 from pathlib import Path
 
-
+"""
+Diese Datei dient zur Wiedergebung der path für alle Ordnen in der Data Ordner. Die Struktur für
+die Daten ist gleich wie bei die Json Datei. csv Daten und die Daten nach dem Standardization werden
+separate zur eingenen Ordnen zugeordnet. Dateiname bleiben gleich.
+"""
 
 def get_csv_path_1():
     current_dir = Path.cwd()
