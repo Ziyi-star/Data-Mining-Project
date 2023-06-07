@@ -15,7 +15,5 @@ def json_to_csv(json_data, csv_path):
         for item in data:
             writer.writerow(item)
 
-def read_json():
-    json_file
 
 
