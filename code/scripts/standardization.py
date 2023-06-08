@@ -1,23 +1,27 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-import numpy as np
 import csv
 
 
 def standardization(csv_data, new_stan_file_path):
-    # Load the data
+    # Load the data from csv_data
+    print("CSV data file:", csv_data)
+    print("New standardized file path:", new_stan_file_path)
+
     data = pd.read_csv(csv_data)
     # Standardize the features
     scaler = StandardScaler()
-    X = scaler.fit_transform(data)
+    standardizedData = scaler.fit_transform(data)
 
-    # CSV-Datei öffnen
-    with open(new_stan_file_path, 'w', newline='') as csv_file:
-        writer = csv.writer(new_stan_file_path)
+    # Open the CSV file in write mode
+    with open(new_stan_file_path, 'w', newline='') as file:
+        writer = csv.writer(file)
 
-        # Daten aus JSON in CSV schreiben
-        for item in data:
-            writer.writerow(X)
+        # Write data to the CSV file
+        for row in standardizedData:
+            writer.writerow(row)
+
+
 
 
 
