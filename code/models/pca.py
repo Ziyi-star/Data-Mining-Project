@@ -1,34 +1,25 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-
-def accumulate(var_ration):
-    acc = 0
-    r = np.empty(len(var_ration))
-    for idx, value in enumerate(var_ration):
-        acc += value
-        r[idx] = acc
-    return r
+from matplotlib import pyplot as plt
+from sklearn.decomposition import PCA
 
 
 def pca(df, name):
-    cov = df.cov(numeric_only=True)
-    cov_num = cov.apply(pd.to_numeric, errors='coerce')
-    eigenvalues = np.linalg.eigvals(cov_num)
-    explained_var_ratio = eigenvalues / np.sum(eigenvalues)
-    acc = accumulate(explained_var_ratio)
-
-    #plot the diagramm
-    plt.bar(range(0, len(explained_var_ratio)), explained_var_ratio, alpha=0.5,
-            align='center', label='Individual explained variance')
-    plt.step(range(0, len(acc)), acc, where='mid',
-             label='Cumulative explained variance')
-    plt.ylabel('Explained variance ratio')
-    plt.xlabel('Principal component index')
-    plt.legend(loc='best')
-    plt.tight_layout()
+    # Perform PCA
+    pca = PCA()
+    pca.fit(df)
+    # Get the explained variance ratio and the cumulative sums of the eigenvalues
+    explained_variance_ratio = pca.explained_variance_ratio_
+    cumulative_sums = np.cumsum(pca.explained_variance_)
+    # Plot the results
+    plt.plot(explained_variance_ratio, marker='o')
+    plt.plot(cumulative_sums / cumulative_sums[-1], marker='o')
+    plt.xlabel('Number of Components')
+    plt.ylabel('Explained Variance Ratio / Cumulative Sum')
+    plt.legend(['Explained Variance Ratio', 'Cumulative Sum'])
     plt.title(name)
     plt.show()
+
 
 
 
