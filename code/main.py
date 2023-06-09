@@ -1,6 +1,9 @@
+import pandas as pd
+
 from datasets.convertData import json_to_csv
 from scripts.standardization import standardization
 from utils.paths import *
+from models.pca import pca
 
 
 def json_all_file_to_csv():
@@ -62,7 +65,23 @@ def standardization_for_all():
         new_stan_file_path = stan_dir / (csv_file_path.stem + '.csv')
         standardization(csv_file_path, new_stan_file_path)
 
+def pca_for_all():
+    # / 'data' / 'data' / 'standardization' / '18_2_17'
+    stan_dir_1 = get_stan_path_1()
+    # / 'data' / 'data' / 'standardization'
+    stan_dir = get_stan_path()
+
+    # Construct the output CSV file path in / 'data' / 'data' / 'standardization' / '18_2_17'
+    for stan_file_path in stan_dir_1.glob('*.csv'):
+        df = pd.read_csv(stan_file_path)
+        pca(df, stan_file_path.name)
+
+    for stan_file_path in stan_dir_1.glob('*.csv'):
+        df = pd.read_csv(stan_file_path)
+        pca(df, stan_file_path.name)
+
 
 if __name__ == '__main__':
     json_all_file_to_csv()
     standardization_for_all()
+    pca_for_all()
