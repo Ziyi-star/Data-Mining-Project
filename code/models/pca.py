@@ -10,6 +10,7 @@ def accumulate(var_ration):
         r[idx] = acc
     return r
 
+
 def pca(df, name):
     cov = df.cov(numeric_only=True)
     cov_num = cov.apply(pd.to_numeric, errors='coerce')
@@ -28,3 +29,7 @@ def pca(df, name):
     plt.tight_layout()
     plt.title(name)
     plt.show()
+
+
+
+

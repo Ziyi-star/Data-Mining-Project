@@ -7,18 +7,6 @@ from models.pca import pca
 
 
 def json_all_file_to_csv():
-    # current_dir = Path.cwd()
-    # # print(current_dir)
-    # project_dir = current_dir.parent
-    # # print(project_dir)
-    # # 'data' / 'data' / '18_2_17_8_15_19_20_17_4_18'
-    # json_dir_1 = project_dir / 'data' / 'data' / '18_2_17_8_15_19_20_17_4_18'
-    # # / 'data' / 'data'
-    # json_dir = project_dir / 'data' / 'data'
-    # # / 'data' / 'data' / 'csv' / '18_2_17'
-    # csv_dir_1 = project_dir / 'data' / 'data' / 'csv' / '18_2_17'
-    # # / 'data' / 'data' / 'csv'
-    # csv_dir = project_dir / 'data' / 'data' / 'csv'
 
     json_dir_1 = get_json_path_1()
     json_dir = get_json_path()
