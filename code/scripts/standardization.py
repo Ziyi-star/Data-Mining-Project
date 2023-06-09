@@ -4,9 +4,6 @@ import csv
 
 
 def standardization(csv_data, new_stan_file_path):
-    # Load the data from csv_data
-    print("CSV data file:", csv_data)
-    print("New standardized file path:", new_stan_file_path)
 
     data = pd.read_csv(csv_data)
     # Standardize the features
