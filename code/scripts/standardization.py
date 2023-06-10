@@ -13,6 +13,7 @@ def standardization(csv_data, new_stan_file_path):
     # Open the CSV file in write mode
     with open(new_stan_file_path, 'w', newline='') as file:
         writer = csv.writer(file)
+
         # add headers
         # Assuming you have a DataFrame called 'df' containing your data
         num_attributes = len(data.columns)
@@ -24,6 +25,7 @@ def standardization(csv_data, new_stan_file_path):
         # df.to_csv('your_file.csv', index=False)
         writer.writerow(headers)
         # Write data to the CSV file
+
         for row in standardizedData:
             writer.writerow(row)
 

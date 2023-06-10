@@ -4,6 +4,8 @@ from datasets.convertData import json_to_csv
 from scripts.standardization import standardization
 from utils.paths import *
 from models.pca import pca
+from scripts.outlier import find_replace_outlier
+
 
 
 def json_all_file_to_csv():
@@ -68,8 +70,34 @@ def pca_for_all():
         df = pd.read_csv(stan_file_path)
         pca(df, stan_file_path.name)
 
+def find_replace_outlier_for_all():
+    # / 'data' / 'data' / 'stan' / '18_2_17'
+    stan_dir_1 = get_stan_path_1()
+    # / 'data' / 'data' / 'stan'
+    stan_dir = get_stan_path()
+    # / 'data' / 'data' / 'outlier' / '18_2_17'
+    outlier_dir_1 = get_outlier_path_1()
+    # / 'data' / 'data' / 'outlier'
+    outlier_dir = get_outlier_path()
+
+    # Construct the output CSV file path in / 'data' / 'data' / 'standardization' / '18_2_17'
+    for stan_file_path in stan_dir_1.glob('*.csv'):
+        new_out_file_path = outlier_dir_1 / (stan_file_path.stem + '.csv')
+        # Call the standardization function
+        find_replace_outlier(stan_file_path, new_out_file_path)
+
+    # Construct the output CSV file path in / 'data' / 'data' / 'csv'
+    for stan_file_path in stan_dir.glob('*.*'):
+        # Construct the output CSV file path
+        new_out_file_path = outlier_dir / (stan_file_path.stem + '.csv')
+        find_replace_outlier(stan_file_path, new_out_file_path)
+
+
 
 if __name__ == '__main__':
     json_all_file_to_csv()
     standardization_for_all()
-    pca_for_all()
+    #pca_for_all()
+    find_replace_outlier_for_all()
+
+
