@@ -16,6 +16,8 @@ def pca(df, name):
 
     # Get the attribute names in the order of the PCs
     sorted_indices = np.argsort(np.abs(pca.components_[0]))
+    print(sorted_indices)
+    print(np.abs(pca.components_[0]))
     sorted_attribute_names = [attribute_names[i] for i in sorted_indices]
 
     # Plot the results
