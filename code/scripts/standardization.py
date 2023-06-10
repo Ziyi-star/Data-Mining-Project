@@ -19,10 +19,8 @@ def standardization(csv_data, new_stan_file_path):
         num_attributes = len(data.columns)
         # Generate default headers
         headers = ['Attribut ' + str(i + 1) for i in range(num_attributes)]
-        # # Assign headers to the DataFrame
-        # data.columns = headers
-        # # Save the DataFrame to a CSV file with the headers
-        # df.to_csv('your_file.csv', index=False)
+        # Assign headers to the DataFrame
+        data.columns = headers
         writer.writerow(headers)
         # Write data to the CSV file
 
