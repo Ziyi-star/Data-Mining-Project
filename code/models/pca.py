@@ -16,8 +16,6 @@ def pca(df, name):
 
     # Get the attribute names in the order of the PCs
     sorted_indices = np.argsort(np.abs(pca.components_[0]))
-    print(sorted_indices)
-    print(np.abs(pca.components_[0]))
     sorted_attribute_names = [attribute_names[i] for i in sorted_indices]
 
     # Plot the results
@@ -29,7 +27,7 @@ def pca(df, name):
     plt.axhline(y=0.85, color='r', linestyle='-')
     plt.title(name)
     # Set the x-ticks with attribute names for each principal component
-    plt.xticks(range(len(attribute_names)), attribute_names, rotation=45, ha='right')
+    #plt.xticks(range(len(attribute_names)), attribute_names, rotation=45, ha='right')
 
     # Show attribute names for each principal component
     for i, (x, y) in enumerate(zip(range(len(sorted_attribute_names)), explained_variance_ratio)):

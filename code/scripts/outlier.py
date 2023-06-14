@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import csv
 
 def find_replace_outlier(csv_data, new_stan_file_path):
     # Load the CSV file into a pandas DataFrame
