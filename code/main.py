@@ -66,7 +66,7 @@ def pca_for_all():
         df = pd.read_csv(stan_file_path)
         pca(df, stan_file_path.name)
 
-    for stan_file_path in stan_dir_1.glob('*.csv'):
+    for stan_file_path in stan_dir.glob('*.csv'):
         df = pd.read_csv(stan_file_path)
         pca(df, stan_file_path.name)
 
@@ -97,7 +97,7 @@ def find_replace_outlier_for_all():
 if __name__ == '__main__':
     json_all_file_to_csv()
     standardization_for_all()
-    #pca_for_all()
+    pca_for_all()
     find_replace_outlier_for_all()
 
 
