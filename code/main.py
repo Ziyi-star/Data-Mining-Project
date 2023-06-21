@@ -110,11 +110,6 @@ def choose_attribut_for_all():
         # Call the standardization function
         chooseAttribut(outlier_file_path, new_outlier_file_path)
 
-    # Construct the output CSV file path in / 'data' / 'data' / 'csv'
-    for outlier_file_path in outlier_dir.glob('*.*'):
-        # Construct the output CSV file path
-        new_outlier_file_path = selection_dir / (outlier_file_path.stem + '.csv')
-        chooseAttribut(outlier_file_path, new_outlier_file_path)
 
 
 if __name__ == '__main__':
