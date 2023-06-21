@@ -54,4 +54,16 @@ def get_outlier_path_1():
     stan_dir = project_dir / 'data' / 'data' / 'outlier' / '18_2_17'
     return stan_dir
 
+def get_selection_path():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    stan_dir = project_dir / 'data' / 'data' / 'attributeSelection'
+    return stan_dir
+
+def get_selection_path_1():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    stan_dir = project_dir / 'data' / 'data' / 'attributeSelection' / '18_2_17'
+    return stan_dir
+
 
