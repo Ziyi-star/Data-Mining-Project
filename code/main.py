@@ -6,8 +6,7 @@ from models.chooseAttribut import chooseAttribut
 from utils.paths import *
 from models.pca import pca
 from scripts.outlier import find_replace_outlier
-
-
+from models.cMeans import clustering_cmeans
 
 def json_all_file_to_csv():
 
@@ -110,6 +109,11 @@ def choose_attribut_for_all():
         # Call the standardization function
         chooseAttribut(outlier_file_path, new_outlier_file_path)
 
+def cMeans_for_all():
+    selection_dir_1 = get_selection_path_1()
+    for selection_file_path in selection_dir_1.glob('*.csv'):
+        # Call the standardization function
+        clustering_cmeans(selection_file_path, 3)
 
 
 if __name__ == '__main__':
@@ -117,6 +121,7 @@ if __name__ == '__main__':
     #standardization_for_all()
     #pca_for_all()
     #find_replace_outlier_for_all()
-    choose_attribut_for_all()
+    #choose_attribut_for_all()
+    cMeans_for_all()
 
 
