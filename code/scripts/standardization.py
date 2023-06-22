@@ -5,7 +5,7 @@ import csv
 
 def standardization(csv_data, new_stan_file_path):
 
-    data = pd.read_csv(csv_data)
+    data = pd.read_csv(csv_data, encoding = "utf-8", header=None)
     # Standardize the features
     scaler = StandardScaler()
     standardizedData = scaler.fit_transform(data)

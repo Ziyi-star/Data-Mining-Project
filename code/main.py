@@ -107,18 +107,20 @@ def choose_attribut_for_all():
 
 def cMeans_for_all():
     selection_dir_1 = get_selection_path_1()
+    clustering_3_path = get_cmean_3_path_1()
     for selection_file_path in selection_dir_1.glob('*.csv'):
         print(selection_file_path)
+        new_data_path = clustering_3_path / (selection_file_path.stem + '.csv')
         # Call the standardization function
-        clustering_cmeans(selection_file_path, 3)
+        clustering_cmeans(selection_file_path, 3, new_data_path)
 
 
 if __name__ == '__main__':
-    # json_all_file_to_csv()
-    # standardization_for_all()
-    # pca_for_all()
-    # find_replace_outlier_for_all()
-    # choose_attribut_for_all()
+    #json_all_file_to_csv()
+    #standardization_for_all()
+    #pca_for_all()
+    #find_replace_outlier_for_all()
+    #choose_attribut_for_all()
     cMeans_for_all()
 
 
