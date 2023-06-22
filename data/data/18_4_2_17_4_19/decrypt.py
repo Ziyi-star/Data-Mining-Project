@@ -52,7 +52,7 @@ def decrypt(password):
 
 
 def main():
-    password = b""
+    password = b"5_0_"
 
     decrypt(password)
 

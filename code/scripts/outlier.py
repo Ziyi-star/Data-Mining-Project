@@ -3,7 +3,7 @@ import numpy as np
 
 def find_replace_outlier(csv_data, new_stan_file_path):
     # Load the CSV file into a pandas DataFrame
-    data = pd.read_csv(csv_data)
+    data = pd.read_csv(csv_data, encoding="utf-8")
 
     # find and replace outliers
     # Calculate the mean and standard deviation of the data
