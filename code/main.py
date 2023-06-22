@@ -1,6 +1,7 @@
 import pandas as pd
 
 from datasets.convertData import json_to_csv
+from datasets.decryptName import decryptName
 from scripts.standardization import standardization
 from models.chooseAttribut import chooseAttribut
 from utils.paths import *
@@ -20,7 +21,8 @@ def json_all_file_to_csv():
     for json_file_path in json_dir_1.glob('*.json'):
         # Construct the output CSV file path
         # .stem attribute is used to get the filename stem (without the extension), which is then used to construct the output CSV file path.
-        csv_file_path = csv_dir_1 / (json_file_path.stem + '.csv')
+        name = decryptName(json_file_path.stem)
+        csv_file_path = csv_dir_1 / (name + '.csv')
         # Convert JSON to CSV
         json_to_csv(json_file_path, csv_file_path)
 
@@ -116,11 +118,11 @@ def cMeans_for_all():
 
 
 if __name__ == '__main__':
-    #json_all_file_to_csv()
+    json_all_file_to_csv()
     #standardization_for_all()
     #pca_for_all()
     #find_replace_outlier_for_all()
     #choose_attribut_for_all()
-    cMeans_for_all()
+    #cMeans_for_all()
 
 
