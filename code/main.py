@@ -96,12 +96,8 @@ def find_replace_outlier_for_all():
 def choose_attribut_for_all():
     # / 'data' / 'data' / 'outlier' / '18_2_17'
     outlier_dir_1 = get_outlier_path_1()
-    # / 'data' / 'data' / 'outlier'
-    outlier_dir = get_outlier_path()
-    # / 'data' / 'data' / 'stan' / '18_2_17'
+    #/ 'data' / 'data' / 'attributeSelection' / '18_2_17'
     selection_dir_1 = get_selection_path_1()
-    # / 'data' / 'data' / 'stan'
-    selection_dir = get_selection_path()
 
     # Construct the output CSV file path in / 'data' / 'data' / 'standardization' / '18_2_17'
     for outlier_file_path in outlier_dir_1.glob('*.csv'):
@@ -112,16 +108,17 @@ def choose_attribut_for_all():
 def cMeans_for_all():
     selection_dir_1 = get_selection_path_1()
     for selection_file_path in selection_dir_1.glob('*.csv'):
+        print(selection_file_path)
         # Call the standardization function
         clustering_cmeans(selection_file_path, 3)
 
 
 if __name__ == '__main__':
-    #json_all_file_to_csv()
-    #standardization_for_all()
-    #pca_for_all()
-    #find_replace_outlier_for_all()
-    #choose_attribut_for_all()
+    # json_all_file_to_csv()
+    # standardization_for_all()
+    # pca_for_all()
+    # find_replace_outlier_for_all()
+    # choose_attribut_for_all()
     cMeans_for_all()
 
 
