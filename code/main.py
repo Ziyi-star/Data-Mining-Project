@@ -112,7 +112,7 @@ def cMeans_for_all():
         print(selection_file_path)
         new_data_path = clustering_3_path / (selection_file_path.stem + '.csv')
         # Call the standardization function
-        clustering_cmeans(selection_file_path, 3, new_data_path)
+        clustering_cmeans(selection_file_path, 3, clustering_3_path)
 
 
 if __name__ == '__main__':

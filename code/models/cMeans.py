@@ -10,9 +10,10 @@ n_init= Several runs are recommended for sparse high-dimensional problems
 
 """
 
-def clustering_cmeans(csv_data, cluster_number, new_data_path):
+def clustering_cmeans(csv_data, cluster_number, clustering_dir_path):
     # Load the CSV file into a pandas DataFrame, skipping the header row
     data = pd.read_csv(csv_data, encoding="utf-8")
+
 
     for seed in range(5):
         kmeans = KMeans(n_clusters=cluster_number, init='k-means++', n_init=5, max_iter=300, random_state=seed)
@@ -23,6 +24,8 @@ def clustering_cmeans(csv_data, cluster_number, new_data_path):
         predict = kmeans.predict(data)
 
         data['Predict'] = pd.Series(predict, index=data.index)
+
+        new_data_path = clustering_dir_path / (csv_data.stem + '__' + str(seed) + '.csv')
         data.to_csv(new_data_path, index=None, sep=',', mode='a')
 
     #perform KMeans
