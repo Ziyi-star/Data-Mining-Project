@@ -22,5 +22,5 @@ def find_replace_outlier(csv_data, new_stan_file_path):
     # Replace outliers below the mean with mean - 2 * std
     data[outliers_below.columns] = np.where(data[outliers_below.columns] < mean - 2 * std, mean - 2 * std, data[outliers_below.columns])
 
-    data.to_csv(new_stan_file_path, index=None, sep=',', mode='a')
+    data.to_csv(new_stan_file_path, index=None, sep=',', mode='w+')
 

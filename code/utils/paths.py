@@ -78,4 +78,14 @@ def get_cmean_3_path_1():
     stan_dir = project_dir / 'data' / 'data' / 'cMeans3' / '18_2_17'
     return stan_dir
 
+def get_cmeans_4_path():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    stan_dir = project_dir / 'data' / 'data' / 'cMeans4'
+    return stan_dir
 
+def get_cmean_4_path_1():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    stan_dir = project_dir / 'data' / 'data' / 'cMeans4' / '18_2_17'
+    return stan_dir

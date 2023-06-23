@@ -26,7 +26,7 @@ def clustering_cmeans(csv_data, cluster_number, clustering_dir_path):
         data['Predict'] = pd.Series(predict, index=data.index)
 
         new_data_path = clustering_dir_path / (csv_data.stem + '__' + str(seed) + '.csv')
-        data.to_csv(new_data_path, index=None, sep=',', mode='a')
+        data.to_csv(new_data_path, index=None, sep=',', mode='w+')
 
     #perform KMeans
 
