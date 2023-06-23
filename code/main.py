@@ -152,18 +152,39 @@ def cMeans4_reduce_and_plot_for_all_3D():
     for stan_file_path in stan_dir_1.glob('*.csv'):
         df = pd.read_csv(stan_file_path)
         cMeans_reduce_and_plot_3D(df, stan_file_path.name)
+def cMeans5_for_all():
+    selection_dir_1 = get_selection_path_1()
+    clustering_5_path = get_cmean_5_path_1()
+    for selection_file_path in selection_dir_1.glob('*.csv'):
+        print(selection_file_path)
+        # Call the standardization function
+        clustering_cmeans(selection_file_path, 5, clustering_5_path)
+
+def cMeans5_reduce_and_plot_for_all_3D():
+    # 'data' / 'data' / 'cMeans4' / '18_2_17'
+    stan_dir_1 = get_cmean_5_path_1()
+
+    # Construct the output CSV file path in 'data' / 'data' / 'cMeans4' / '18_2_17'
+    for stan_file_path in stan_dir_1.glob('*.csv'):
+        df = pd.read_csv(stan_file_path)
+        cMeans_reduce_and_plot_3D(df, stan_file_path.name)
+
 
 if __name__ == '__main__':
-    #json_all_file_to_csv()
-    #standardization_for_all()
-    #pca_for_all()
-    #find_replace_outlier_for_all()
-    #choose_attribut_for_all()
-    #cMeans3_for_all()
+    # json_all_file_to_csv()
+    # standardization_for_all()
+    # pca_for_all()
+    # find_replace_outlier_for_all()
+    # choose_attribut_for_all()
+    cMeans3_for_all()
     #cMeans_reduce_and_plot_for_all()
     #cMeans_reduce_and_plot_for_all_3D()
-    #cMeans4_for_all()
-    cMeans4_reduce_and_plot_for_all_3D()
+    cMeans4_for_all()
+    cMeans5_for_all()
+    #cMeans5_reduce_and_plot_for_all_3D()
+
+
+
 
 
 
