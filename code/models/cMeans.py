@@ -1,8 +1,9 @@
 import pandas as pd
-import csv
 from sklearn.cluster import KMeans
 import numpy as np
 from sklearn.metrics import silhouette_score
+from sklearn.metrics import davies_bouldin_score
+
 
 
 """
@@ -36,3 +37,15 @@ def clustering_cmeans(csv_data, cluster_number, clustering_dir_path):
     #perform KMeans
 
     #calculate the size of every cluster, print
+
+def clustering_evaluation(csv_data):
+    data = pd.read_csv(csv_data, encoding="utf-8")
+    for c in range(3, 21):
+        kMeans = KMeans(n_clusters=c, init='k-means++', n_init=5, max_iter=300, random_state=0)
+        kMeans.fit(data)
+
+        predict = kMeans.predict(data)
+        silhouette_avg = silhouette_score(data, predict)
+        davies_bouldin_avg = davies_bouldin_score(data, predict)
+
+
