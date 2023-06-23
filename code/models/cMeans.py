@@ -3,6 +3,8 @@ from sklearn.cluster import KMeans
 import numpy as np
 from sklearn.metrics import silhouette_score
 from sklearn.metrics import davies_bouldin_score
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
 
 
@@ -38,14 +40,38 @@ def clustering_cmeans(csv_data, cluster_number, clustering_dir_path):
 
     #calculate the size of every cluster, print
 
-def clustering_evaluation(csv_data):
+def clustering_evaluation(csv_data, max):
     data = pd.read_csv(csv_data, encoding="utf-8")
-    for c in range(3, 21):
+    silhouette_list = []
+    davies_bouldin_list = []
+
+    for c in range(3, max):
         kMeans = KMeans(n_clusters=c, init='k-means++', n_init=5, max_iter=300, random_state=0)
         kMeans.fit(data)
 
         predict = kMeans.predict(data)
         silhouette_avg = silhouette_score(data, predict)
+        silhouette_list.append(silhouette_avg)
         davies_bouldin_avg = davies_bouldin_score(data, predict)
+        davies_bouldin_list.append(davies_bouldin_avg)
 
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 8))
+
+    ax1.plot(range(3, max), silhouette_list, marker='o', linestyle='-', color='blue')
+    ax1.set_xlabel('Number of Clusters')
+    ax1.set_ylabel('Silhouette Score')
+    ax1.set_title(csv_data.stem + 'Silhouette Score vs. Number of Clusters')
+    ax1.grid(True)
+    ax1.xaxis.set_major_locator(ticker.MaxNLocator(integer=True))  # Set x-axis tick labels as integers
+
+    ax2.plot(range(3, max), davies_bouldin_list, marker='o', linestyle='-', color='red')
+    ax2.set_xlabel('Number of Clusters')
+    ax2.set_ylabel('Davies-Bouldin Index')
+    ax2.set_title('Davies-Bouldin Index vs. Number of Clusters')
+    ax2.grid(True)
+    ax2.xaxis.set_major_locator(ticker.MaxNLocator(integer=True))  # Set x-axis tick labels as integers
+
+    plt.subplots_adjust(hspace=0.4)
+
+    plt.show()
 

@@ -7,7 +7,7 @@ from models.chooseAttribut import chooseAttribut
 from utils.paths import *
 from models.pca import pca
 from scripts.outlier import find_replace_outlier
-from models.cMeans import clustering_cmeans
+from models.cMeans import *
 from visualization.cMeansPlot import cMeans_reduce_and_plot
 from visualization.cMeans3DPlot import cMeans_reduce_and_plot_3D
 
@@ -169,19 +169,35 @@ def cMeans5_reduce_and_plot_for_all_3D():
         df = pd.read_csv(stan_file_path)
         cMeans_reduce_and_plot_3D(df, stan_file_path.name)
 
+def evalutation_for_all_1():
+    selection_dir_1 = get_selection_path_1()
+
+    for selection_file_path in selection_dir_1.glob('*.csv'):
+        # Call the standardization function
+        clustering_evaluation(selection_file_path, 41)
+
+
+
+def evaluation_for_all():
+    outlier_dir = get_outlier_path()
+
+    for outlier_dir_path in outlier_dir.glob('*.csv'):
+        clustering_evaluation(outlier_dir_path, 41)
 
 if __name__ == '__main__':
-    # json_all_file_to_csv()
-    # standardization_for_all()
+    json_all_file_to_csv()
+    standardization_for_all()
     # pca_for_all()
-    # find_replace_outlier_for_all()
-    # choose_attribut_for_all()
-    cMeans3_for_all()
+    find_replace_outlier_for_all()
+    #choose_attribut_for_all()
+    #cMeans3_for_all()
     #cMeans_reduce_and_plot_for_all()
     #cMeans_reduce_and_plot_for_all_3D()
-    cMeans4_for_all()
-    cMeans5_for_all()
+    #cMeans4_for_all()
+    #cMeans5_for_all()
     #cMeans5_reduce_and_plot_for_all_3D()
+    #evalutation_for_all_1()
+    evaluation_for_all()
 
 
 
