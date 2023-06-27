@@ -182,13 +182,14 @@ def evaluation_for_all():
     outlier_dir = get_outlier_path()
 
     for outlier_dir_path in outlier_dir.glob('*.csv'):
+        print(outlier_dir_path)
         clustering_evaluation(outlier_dir_path, 41)
 
 if __name__ == '__main__':
-    json_all_file_to_csv()
-    standardization_for_all()
+    #json_all_file_to_csv()
+    #standardization_for_all()
     # pca_for_all()
-    find_replace_outlier_for_all()
+    #find_replace_outlier_for_all()
     #choose_attribut_for_all()
     #cMeans3_for_all()
     #cMeans_reduce_and_plot_for_all()
@@ -196,8 +197,8 @@ if __name__ == '__main__':
     #cMeans4_for_all()
     #cMeans5_for_all()
     #cMeans5_reduce_and_plot_for_all_3D()
-    #evalutation_for_all_1()
-    evaluation_for_all()
+    evalutation_for_all_1()
+    #evaluation_for_all()
 
 
 

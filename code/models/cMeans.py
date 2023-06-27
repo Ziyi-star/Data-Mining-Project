@@ -36,9 +36,24 @@ def clustering_cmeans(csv_data, cluster_number, clustering_dir_path):
         silhouette_avg = silhouette_score(data, predict)
         print(f"Silhouette coefficient for seed {seed}: {silhouette_avg}")
 
-    #perform KMeans
 
-    #calculate the size of every cluster, print
+def clustering_cmeans_without(csv_data, cluster_number, clustering_dir_path):
+    data = pd.read_csv(csv_data, encoding="utf-8")
+    kmeans = KMeans(n_clusters=cluster_number, init='k-means++', n_init=5, max_iter=300, random_state=0)
+    kmeans.fit(data)
+
+    predict = kmeans.predict(data)
+
+    data['Predict'] = pd.Series(predict, index=data.index)
+
+    new_data_path = clustering_dir_path / (csv_data.stem + '.csv')
+    data.to_csv(new_data_path, index=None, sep=',', mode='w+')
+
+    # Calculate Silhouette coefficients
+    silhouette_avg = silhouette_score(data, predict)
+    davies_bouldin_avg = davies_bouldin_score(data, predict)
+    print(f"Silhouette coefficient for data {csv_data.stem}: {silhouette_avg}")
+    print(f"Davies_Bouldin coefficient for data {csv_data.stem}: {davies_bouldin_avg}")
 
 def clustering_evaluation(csv_data, max):
     data = pd.read_csv(csv_data, encoding="utf-8")
