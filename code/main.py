@@ -195,7 +195,7 @@ def cMeans_withK_for_all_plot():
     nameList= ["rosetta", "salt", "hobbit", "earth", "nks", "einstein", "symmetric", "fibonacci", "hitchhiker", "lorem", "sun"]
     nameList_1 = ["x0", "x1", "x2"]
 
-
+    for name, clusterNummer in zip(kList, nameList):
     # for name and ks:
         #cmeans without
         #3d plot
