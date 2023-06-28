@@ -38,6 +38,7 @@ def clustering_cmeans(csv_data, cluster_number, clustering_dir_path):
 
 
 def clustering_cmeans_without(csv_data, cluster_number, clustering_dir_path):
+    print(csv_data)
     data = pd.read_csv(csv_data, encoding="utf-8")
     kmeans = KMeans(n_clusters=cluster_number, init='k-means++', n_init=5, max_iter=300, random_state=0)
     kmeans.fit(data)

@@ -184,7 +184,7 @@ def evaluation_for_all():
         clustering_evaluation(outlier_dir_path, 6)
 
 
-def cMeans_withK_for_all_plot():
+def cMeans_withK():
     #list for ks
     kList = [10, 13, 7, 13, 13, 33, 20, 15, 19, 9, 14]
     kList_1 = [5, 31, 18]
@@ -195,14 +195,23 @@ def cMeans_withK_for_all_plot():
 
     selection = get_selection_path_1()
     new_path = get_cmean_path()
+    outlier = get_outlier_path()
 
+    """
     for name, clusterNummer in zip(nameList, kList):
         path = Path.joinpath(selection, name)
         clustering_cmeans_without(path, clusterNummer, new_path)
+    """
 
-    # for name and ks:
-        #cmeans without
-        #3d plot
+    for name, clusterNummer in zip(nameList_1, kList_1):
+        path = Path.joinpath(outlier, name)
+        clustering_cmeans_without(path, clusterNummer, new_path)
+
+def plot_for_all():
+    cmeans_dir = get_cmean_path()
+    for cmeans_dir_path in cmeans_dir.glob('*.csv'):
+        df = pd.read_csv(cmeans_dir_path)
+        cMeans_reduce_and_plot_3D(df, cmeans_dir_path.stem)
 
 
 if __name__ == '__main__':
@@ -220,7 +229,8 @@ if __name__ == '__main__':
     #evalutation_for_all_1()
     #evaluation_for_all()
     #cMeans_for_all()
-    cMeans_withK_for_all_plot()
+    #cMeans_withK_for_all_plot()
+    plot_for_all()
 
 
 
