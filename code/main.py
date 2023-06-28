@@ -188,10 +188,14 @@ def cMeans_for_all():
 
 def cMeans_withK_for_all_plot():
     #list for ks
-    kList = []
+    kList = [10, 13, 7, 13, 13, 33, 20, 15, 19, 9, 14]
+    kList_1 = [5, 31, 18]
 
     # list for name
-    nameList= []
+    nameList= ["rosetta", "salt", "hobbit", "earth", "nks", "einstein", "symmetric", "fibonacci", "hitchhiker", "lorem", "sun"]
+    nameList_1 = ["x0", "x1", "x2"]
+
+
     # for name and ks:
         #cmeans without
         #3d plot
