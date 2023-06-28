@@ -169,6 +169,7 @@ def cMeans5_reduce_and_plot_for_all_3D():
         df = pd.read_csv(stan_file_path)
         cMeans_reduce_and_plot_3D(df, stan_file_path.name)
 
+#18_2_17
 def evalutation_for_all_1():
     selection_dir_1 = get_selection_path_1()
 
@@ -178,13 +179,23 @@ def evalutation_for_all_1():
 
 def evaluation_for_all():
     outlier_dir = get_outlier_path()
-
     for outlier_dir_path in outlier_dir.glob('*.csv'):
         print(outlier_dir_path)
-        clustering_evaluation(outlier_dir_path, 41)
+        clustering_evaluation(outlier_dir_path, 6)
 
 def cMeans_for_all():
     print(get_outlier_path_1())
+
+def cMeans_withK_for_all_plot():
+    #list for ks
+    kList = []
+
+    # list for name
+    nameList= []
+    # for name and ks:
+        #cmeans without
+        #3d plot
+
 
 if __name__ == '__main__':
     #json_all_file_to_csv()
@@ -201,6 +212,7 @@ if __name__ == '__main__':
     #evalutation_for_all_1()
     #evaluation_for_all()
     cMeans_for_all()
+    cMeans_withK_for_all_plot()
 
 
 
