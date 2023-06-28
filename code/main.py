@@ -183,8 +183,6 @@ def evaluation_for_all():
         print(outlier_dir_path)
         clustering_evaluation(outlier_dir_path, 6)
 
-def cMeans_for_all():
-    print(get_outlier_path_1())
 
 def cMeans_withK_for_all_plot():
     #list for ks
@@ -192,10 +190,16 @@ def cMeans_withK_for_all_plot():
     kList_1 = [5, 31, 18]
 
     # list for name
-    nameList= ["rosetta", "salt", "hobbit", "earth", "nks", "einstein", "symmetric", "fibonacci", "hitchhiker", "lorem", "sun"]
-    nameList_1 = ["x0", "x1", "x2"]
+    nameList= ["rosetta.csv", "salt.csv", "hobbit.csv", "earth.csv", "nks.csv", "einstein.csv", "symmetric.csv", "fibonacci.csv", "hitchhiker.csv", "lorem.csv", "sun.csv"]
+    nameList_1 = ["x0.csv", "x1.csv", "x2.csv"]
 
-    for name, clusterNummer in zip(kList, nameList):
+    selection = get_selection_path_1()
+    new_path = get_cmean_path()
+
+    for name, clusterNummer in zip(nameList, kList):
+        path = Path.joinpath(selection, name)
+        clustering_cmeans_without(path, clusterNummer, new_path)
+
     # for name and ks:
         #cmeans without
         #3d plot
@@ -215,7 +219,7 @@ if __name__ == '__main__':
     #cMeans5_reduce_and_plot_for_all_3D()
     #evalutation_for_all_1()
     #evaluation_for_all()
-    cMeans_for_all()
+    #cMeans_for_all()
     cMeans_withK_for_all_plot()
 
 
