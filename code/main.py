@@ -176,14 +176,15 @@ def evalutation_for_all_1():
         # Call the standardization function
         clustering_evaluation(selection_file_path, 41)
 
-
-
 def evaluation_for_all():
     outlier_dir = get_outlier_path()
 
     for outlier_dir_path in outlier_dir.glob('*.csv'):
         print(outlier_dir_path)
         clustering_evaluation(outlier_dir_path, 41)
+
+def cMeans_for_all():
+    print(get_outlier_path_1())
 
 if __name__ == '__main__':
     #json_all_file_to_csv()
@@ -197,8 +198,9 @@ if __name__ == '__main__':
     #cMeans4_for_all()
     #cMeans5_for_all()
     #cMeans5_reduce_and_plot_for_all_3D()
-    evalutation_for_all_1()
+    #evalutation_for_all_1()
     #evaluation_for_all()
+    cMeans_for_all()
 
 
 
