@@ -1,6 +1,6 @@
 import pandas as pd
 
-from datasets.convertData import json_to_csv
+from datasets.convertData import *
 from datasets.decryptName import decryptName
 from scripts.standardization import standardization
 from models.chooseAttribut import chooseAttribut
@@ -12,7 +12,6 @@ from visualization.cMeansPlot import cMeans_reduce_and_plot
 from visualization.cMeans3DPlot import cMeans_reduce_and_plot_3D
 
 def json_all_file_to_csv():
-
     json_dir_1 = get_json_path_1()
     json_dir = get_json_path()
     csv_dir_1 = get_csv_path_1()
@@ -32,9 +31,29 @@ def json_all_file_to_csv():
     for json_file_path in json_dir.glob('*.json'):
         # Construct the output CSV file path
         csv_file_path = csv_dir / (json_file_path.stem + '.csv')
-
         # Convert JSON to CSV
         json_to_csv(json_file_path, csv_file_path)
+
+def convert_rows_into_colums_for_all() -> object:
+    label_csv_dir = get_label_path()
+
+    for stan_file_path in label_csv_dir.glob('*.csv'):
+        df = pd.read_csv(stan_file_path,header=None)
+        label_colums_file_path = label_csv_dir / (stan_file_path.stem + 'column.csv')
+        convert_row_to_columns(df, label_colums_file_path)
+
+def merge_labels_with_data_for_all():
+    data_csv_dir = get_csv_path()
+    label_csv_dir = get_label_path()
+    data_csv_all_dir = get_klassifikation_path()
+
+    dataList = ['x1.csv','x2.csv']
+    labelList = ['y1column.csv','y2column.csv']
+
+    for dataName, labelName in zip(dataList, labelList):
+        pathData = Path.joinpath(data_csv_dir, dataName)
+        pathLabel = Path.joinpath(label_csv_dir,labelName)
+        merge_labels_with_data(pathData, pathLabel, data_csv_all_dir)
 
 
 def standardization_for_all():
@@ -108,6 +127,9 @@ def choose_attribut_for_all():
         new_outlier_file_path = selection_dir_1 / (outlier_file_path.stem + '.csv')
         # Call the standardization function
         chooseAttribut(outlier_file_path, new_outlier_file_path)
+
+
+
 
 def cMeans3_for_all():
     selection_dir_1 = get_selection_path_1()
@@ -197,11 +219,11 @@ def cMeans_withK():
     new_path = get_cmean_path()
     outlier = get_outlier_path()
 
-    """
+
     for name, clusterNummer in zip(nameList, kList):
         path = Path.joinpath(selection, name)
         clustering_cmeans_without(path, clusterNummer, new_path)
-    """
+
 
     for name, clusterNummer in zip(nameList_1, kList_1):
         path = Path.joinpath(outlier, name)
@@ -229,12 +251,9 @@ if __name__ == '__main__':
     #evalutation_for_all_1()
     #evaluation_for_all()
     #cMeans_for_all()
-    #cMeans_withK_for_all_plot()
-    plot_for_all()
-
-
-
-
-
+    #cMeans_withK()
+    #plot_for_all()
+    #convert_rows_into_colums_for_all()
+    merge_labels_with_data_for_all()
 
 

@@ -113,3 +113,15 @@ def get_cmean_5_path_1():
     project_dir = current_dir.parent
     stan_dir = project_dir / 'data' / 'data' / 'cMeans' / '18_2_17'
     return stan_dir
+
+def get_label_path():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    csv_dir = project_dir / 'data' / 'data' / 'y'
+    return csv_dir
+
+def get_klassifikation_path():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    csv_dir = project_dir / 'data' / 'data' / 'klassifikation'
+    return csv_dir
