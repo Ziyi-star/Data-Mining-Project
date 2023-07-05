@@ -47,8 +47,8 @@ def merge_labels_with_data_for_all():
     label_csv_dir = get_label_path()
     data_csv_all_dir = get_klassifikation_path()
 
-    dataList = ['x1.csv','x2.csv']
-    labelList = ['y1column.csv','y2column.csv']
+    dataList = ['x1.csv','x2.csv','x0.csv']
+    labelList = ['y1column.csv','y2column.csv','y0column.csv']
 
     for dataName, labelName in zip(dataList, labelList):
         pathData = Path.joinpath(data_csv_dir, dataName)

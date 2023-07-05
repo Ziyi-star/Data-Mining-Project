@@ -1,9 +1,7 @@
 import json
 import csv
 from pathlib import Path
-
 import pandas as pd
-import os
 
 
 def json_to_csv(json_data, csv_path):
@@ -38,10 +36,7 @@ def merge_labels_with_data(pathData, pathLabel, data_csv_all_dir):
     #merged_df = pd.merge(df1, df2, on='label')
     merged_df = pd.concat([df1,df2],axis=1)
 ####
-    # Generate a timestamp-based filename for the merged file
-    saveName = pathData.stem()
-    merged_filename = Path.join(data_csv_all_dir, saveName)
-
-
+    saveName = pathData.stem
+    merged_filename = Path.joinpath(data_csv_all_dir, saveName)
     # Write merged data to the generated CSV file
     merged_df.to_csv(merged_filename, index=False)
