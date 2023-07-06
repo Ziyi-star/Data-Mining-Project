@@ -125,3 +125,15 @@ def get_klassifikation_path():
     project_dir = current_dir.parent
     csv_dir = project_dir / 'data' / 'data' / 'klassifikation'
     return csv_dir
+
+def get_klassifikation_train_path():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    csv_dir = project_dir / 'data' / 'data' / 'klassifikation'/'train'
+    return csv_dir
+
+def get_klassifikation_test_path():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    csv_dir = project_dir / 'data' / 'data' / 'klassifikation'/'test'
+    return csv_dir
