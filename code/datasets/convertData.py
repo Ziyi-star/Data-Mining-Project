@@ -50,11 +50,13 @@ def spilt_data(original_data, stan_file_path):
     file_name = stan_file_path.stem
 
     # Define the file names for the training and test sets
-    train_file_name = f'{file_name}_train.csv'
-    test_file_name = f'{file_name}_test.csv'
+    train_file_name = file_name+'train.csv'
+    test_file_name = file_name+'test.csv'
 
-    train_file = Path.joinpath(stan_file_path, train_file_name)
-    test_file = Path.joinpath(stan_file_path, test_file_name)
+    train_file = Path.joinpath(stan_file_path.parent, train_file_name)
+    print(train_file)
+    test_file = Path.joinpath(stan_file_path.parent, test_file_name)
+    print(test_file)
 
     train_df.to_csv(train_file, index=False)
     test_df.to_csv(test_file, index=False)
