@@ -1,11 +1,10 @@
-import pandas as pd
-
 from datasets.convertData import *
 from datasets.decryptName import decryptName
 from scripts.standardization import standardization
 from models.chooseAttribut import chooseAttribut
 from utils.paths import *
 from models.pca import pca
+from models.classification_svm import *
 from scripts.outlier import find_replace_outlier
 from models.cMeans import *
 from visualization.cMeansPlot import cMeans_reduce_and_plot
@@ -238,6 +237,22 @@ def plot_for_all():
         cMeans_reduce_and_plot_3D(df, cmeans_dir_path.stem)
 
 
+def svm_classifier_for_all():
+    train_dir = get_klassifikation_train_path()
+    test_dir = get_klassifikation_test_path()
+    trained_models = get_saved_models_svm()
+
+    for train_dir_data in train_dir.glob('*.csv'):
+        #train svm
+        print(train_dir_data)
+        saved_model_name= train_dir_data.stem +'.pkl'
+        trained_models_path = Path.joinpath(trained_models,saved_model_name)
+        svm_classifier(train_dir_data,trained_models_path)
+
+
+def svm_test_accuracy_for_all():
+    pass
+
 
 if __name__ == '__main__':
     #json_all_file_to_csv()
@@ -258,6 +273,10 @@ if __name__ == '__main__':
     #plot_for_all()
     #convert_rows_into_colums_for_all()
     #merge_labels_with_data_for_all()
-    spilt_data_for_all()
+    #spilt_data_for_all()
+    svm_classifier_for_all()
+    svm_test_accuracy_for_all()
+    #gmm_classifier_for_all()
+    #rf_classifier_for_all()
 
 
