@@ -55,6 +55,14 @@ def merge_labels_with_data_for_all():
         pathLabel = Path.joinpath(label_csv_dir,labelName)
         merge_labels_with_data(pathData, pathLabel, data_csv_all_dir)
 
+def spilt_data_for_all():
+    data_csv_all_dir = get_klassifikation_path()
+    print(data_csv_all_dir)
+    for stan_file_path in data_csv_all_dir.glob('*.csv'):
+        print(stan_file_path)
+        df = pd.read_csv(stan_file_path,header=None)
+        spilt_data(df, stan_file_path)
+
 
 def standardization_for_all():
     # / 'data' / 'data' / 'csv' / '18_2_17'
@@ -115,7 +123,6 @@ def find_replace_outlier_for_all():
         new_out_file_path = outlier_dir / (stan_file_path.stem + '.csv')
         find_replace_outlier(stan_file_path, new_out_file_path)
 
-
 def choose_attribut_for_all():
     # / 'data' / 'data' / 'outlier' / '18_2_17'
     outlier_dir_1 = get_outlier_path_1()
@@ -127,9 +134,6 @@ def choose_attribut_for_all():
         new_outlier_file_path = selection_dir_1 / (outlier_file_path.stem + '.csv')
         # Call the standardization function
         chooseAttribut(outlier_file_path, new_outlier_file_path)
-
-
-
 
 def cMeans3_for_all():
     selection_dir_1 = get_selection_path_1()
@@ -219,11 +223,9 @@ def cMeans_withK():
     new_path = get_cmean_path()
     outlier = get_outlier_path()
 
-
     for name, clusterNummer in zip(nameList, kList):
         path = Path.joinpath(selection, name)
         clustering_cmeans_without(path, clusterNummer, new_path)
-
 
     for name, clusterNummer in zip(nameList_1, kList_1):
         path = Path.joinpath(outlier, name)
@@ -234,6 +236,7 @@ def plot_for_all():
     for cmeans_dir_path in cmeans_dir.glob('*.csv'):
         df = pd.read_csv(cmeans_dir_path)
         cMeans_reduce_and_plot_3D(df, cmeans_dir_path.stem)
+
 
 
 if __name__ == '__main__':
@@ -254,6 +257,7 @@ if __name__ == '__main__':
     #cMeans_withK()
     #plot_for_all()
     #convert_rows_into_colums_for_all()
-    merge_labels_with_data_for_all()
+    #merge_labels_with_data_for_all()
+    spilt_data_for_all()
 
 
