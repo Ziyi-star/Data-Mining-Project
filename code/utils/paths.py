@@ -137,3 +137,15 @@ def get_klassifikation_test_path():
     project_dir = current_dir.parent
     csv_dir = project_dir / 'data' / 'data' / 'klassifikation'/'test'
     return csv_dir
+
+def get_saved_models_svm():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    csv_dir = project_dir / 'data' / 'saved_models' / 'svm'
+    return csv_dir
+
+def get_predictions_svm():
+    current_dir = Path.cwd()
+    project_dir = current_dir.parent
+    csv_dir = project_dir / 'data' / 'predictions'/'svm'
+    return csv_dir

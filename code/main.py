@@ -250,8 +250,33 @@ def svm_classifier_for_all():
         svm_classifier(train_dir_data,trained_models_path)
 
 
-def svm_test_accuracy_for_all():
-    pass
+def svm_test_for_all():
+    test_dir = get_klassifikation_test_path()
+    trained_models = get_saved_models_svm()
+    predictions_svm_dir = get_predictions_svm()
+
+    test_Data_list = ['x1test.csv','x2test.csv']
+    trained_model_list = ['x1train.pkl','x2train.pkl']
+
+    for test_Data,trained_model_data in zip(test_Data_list,trained_model_list):
+        # Load the saved classifier from a file
+        path_test_data = Path.joinpath(test_dir,test_Data)
+        path_model = Path.joinpath(trained_models,trained_model_data)
+        svm_classifier_test(path_test_data,predictions_svm_dir,path_model)
+
+
+def svm_accuricy_for_all():
+    test_dir = get_klassifikation_test_path()
+    predictions_svm_dir = get_predictions_svm()
+
+    test_Data_list = ['x1test.csv', 'x2test.csv']
+    prediction_data_list = ['x1testprediction.csv', 'x2testprediction.csv']
+
+    for test_Data, prediction_data in zip(test_Data_list, prediction_data_list):
+        # Load the saved classifier from a file
+        path_test_data = Path.joinpath(test_dir, test_Data)
+        path_prediction_data= Path.joinpath(predictions_svm_dir, prediction_data)
+        svm_accuricy_test(path_test_data, path_prediction_data)
 
 
 if __name__ == '__main__':
@@ -274,9 +299,9 @@ if __name__ == '__main__':
     #convert_rows_into_colums_for_all()
     #merge_labels_with_data_for_all()
     #spilt_data_for_all()
-    svm_classifier_for_all()
-    svm_test_accuracy_for_all()
-    #gmm_classifier_for_all()
-    #rf_classifier_for_all()
+    #svm_classifier_for_all()
+    #svm_test_for_all()
+    svm_accuricy_for_all()
+
 
 
