@@ -7,12 +7,12 @@ from utils.paths import *
 import matplotlib.pyplot as plt
 
 # define hyperparameters of NN
-input_size = 49
+input_size = 25
 layer_1 = 64
 layer_2 = 32
 layer_3 = 16
 num_classes = 30
-num_epochs = 200
+num_epochs = 50
 learning_rate = 0.00015
 
 class BaseNet(nn.Module):
@@ -134,6 +134,7 @@ def train_net(net, train_loader, test_loader):
     loss_epoch = []
     accuracy_epoch = []
 
+
     for epoch in range(num_epochs):
         loss_train = 0
         correct = 0
@@ -157,15 +158,21 @@ def train_net(net, train_loader, test_loader):
         loss_train1, accuracy_train = test_function(net, train_loader)
         loss_train = loss_train / len(train_loader)
 
-        plot.append_loss_test(loss_test)
-        plot.append_loss_train(loss_train)
-        plot.append_x_axis(epoch + (i + 1) / len(train_dataset) // batch_size)
+        # plot for loss
+        #plot.append_loss_test(loss_test)
+        #plot.append_loss_train(loss_train)
+        #plot.append_x_axis(epoch + (i + 1) / len(train_dataset) // batch_size)
 
         loss = loss_train / len(train_loader)
         accuracy = 100 * correct / total
 
         loss_epoch.append(loss)
         accuracy_epoch.append(accuracy)
+
+        # plot for accuracy
+        plot.append_loss_test(accuracy)
+        plot.append_loss_train(accuracy_train)
+        plot.append_x_axis(epoch + (i + 1) / len(train_dataset) // batch_size)
 
         if (epoch + 1) % 5 == 0:
             print('Epoch [%d/%d], loss train: %.8f, loss test: %.8f, accuracy test: %.2f, accuracy train: %.2f' % (epoch + 1, num_epochs, loss_train, loss_test, accuracy, accuracy_train))
@@ -178,7 +185,7 @@ def train_net(net, train_loader, test_loader):
 if __name__ == '__main__':
     # load train data
     train_path = get_klassifikation_train_path()
-    train_filename = Path.joinpath(train_path, 'x2train.csv')
+    train_filename = Path.joinpath(train_path, 'x0train.csv')
     train = pd.read_csv(train_filename)
     train_data = train.drop(train.columns[-1], axis=1)
     train_label = train.iloc[:, -1]
@@ -187,7 +194,7 @@ if __name__ == '__main__':
 
     # load test data
     test_path = get_klassifikation_test_path()
-    test_filename = Path.joinpath(test_path, 'x2test.csv')
+    test_filename = Path.joinpath(test_path, 'x0test.csv')
     test = pd.read_csv(test_filename)
     test_data = test.drop(test.columns[-1], axis=1)
     test_label = test.iloc[:, -1]
@@ -205,7 +212,7 @@ if __name__ == '__main__':
 
     criterion = nn.CrossEntropyLoss()
 
-    net = NetReLu();
+    net = NetLinear();
     train_net(net, train_loader, test_loader)
 
 
