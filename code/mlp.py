@@ -5,6 +5,8 @@ from abc import ABC, abstractmethod
 import pandas as pd
 from utils.paths import *
 import matplotlib.pyplot as plt
+import json
+
 
 # define hyperparameters of NN
 input_size = 25
