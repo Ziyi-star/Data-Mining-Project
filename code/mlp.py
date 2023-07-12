@@ -204,22 +204,39 @@ if __name__ == '__main__':
     test_label_tensor = torch.tensor(test_label.values)
 
     test_path_1 = get_csv_path()
-    test_filename_1 = Path.joinpath(test_path_1, '')
+    test_filename_1 = Path.joinpath(test_path_1, 'x.csv')
+    test_1 = pd.read_csv(test_filename_1)
+    test_data_tensor_1 = torch.tensor(test_1.values)
+
 
     # 创建数据集对象
     train_dataset = torch.utils.data.TensorDataset(train_data_tensor, train_label_tensor)
-    test_dataset = torch.utils.data.TensorDataset(train_data_tensor, train_label_tensor)
+    test_dataset = torch.utils.data.TensorDataset(test_data_tensor, test_label_tensor)
+    test_dataset_1 = torch.utils.data.TensorDataset(test_data_tensor_1, torch.ones(5790, 1))
+    print(test_data_tensor_1.size())
 
     # 创建数据加载器
     batch_size = 16 # 定义你的小批量大小
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
+    test_loader_1 = torch.utils.data.DataLoader(test_dataset_1, batch_size=5790, shuffle=False)
 
     criterion = nn.CrossEntropyLoss()
+
 
     net = NetLinear();
     train_net(net, train_loader, test_loader)
 
+    
+    predicted_labels = {}
+    for i, (data, labels) in enumerate(test_loader_1):
+        outputs = net(data)
+        _, predicted = torch.max(outputs.data, 1)
+        for j, prediction in enumerate(predicted):
+            predicted_labels[str(j)] = prediction.item()
+
+    with open('predicted_labels.json', 'w') as file:
+        json.dump(list(predicted_labels.values()), file)
 
 
 
