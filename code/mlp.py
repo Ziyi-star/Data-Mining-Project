@@ -203,6 +203,9 @@ if __name__ == '__main__':
     test_data_tensor = torch.tensor(test_data.values)
     test_label_tensor = torch.tensor(test_label.values)
 
+    test_path_1 = get_csv_path()
+    test_filename_1 = Path.joinpath(test_path_1, '')
+
     # 创建数据集对象
     train_dataset = torch.utils.data.TensorDataset(train_data_tensor, train_label_tensor)
     test_dataset = torch.utils.data.TensorDataset(train_data_tensor, train_label_tensor)
@@ -216,6 +219,8 @@ if __name__ == '__main__':
 
     net = NetLinear();
     train_net(net, train_loader, test_loader)
+
+
 
 
 
