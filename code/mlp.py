@@ -9,13 +9,13 @@ import json
 
 
 # define hyperparameters of NN
-input_size = 25
+input_size = 49
 layer_1 = 64
 layer_2 = 32
 layer_3 = 16
 num_classes = 30
-num_epochs = 50
-learning_rate = 0.00015
+num_epochs = 400
+learning_rate = 0.000015
 
 class BaseNet(nn.Module):
     def __init__(self):
@@ -187,7 +187,7 @@ def train_net(net, train_loader, test_loader):
 if __name__ == '__main__':
     # load train data
     train_path = get_klassifikation_train_path()
-    train_filename = Path.joinpath(train_path, 'x0train.csv')
+    train_filename = Path.joinpath(train_path, 'x2train.csv')
     train = pd.read_csv(train_filename)
     train_data = train.drop(train.columns[-1], axis=1)
     train_label = train.iloc[:, -1]
@@ -196,7 +196,7 @@ if __name__ == '__main__':
 
     # load test data
     test_path = get_klassifikation_test_path()
-    test_filename = Path.joinpath(test_path, 'x0test.csv')
+    test_filename = Path.joinpath(test_path, 'x2test.csv')
     test = pd.read_csv(test_filename)
     test_data = test.drop(test.columns[-1], axis=1)
     test_label = test.iloc[:, -1]
@@ -212,14 +212,14 @@ if __name__ == '__main__':
     # 创建数据集对象
     train_dataset = torch.utils.data.TensorDataset(train_data_tensor, train_label_tensor)
     test_dataset = torch.utils.data.TensorDataset(test_data_tensor, test_label_tensor)
-    test_dataset_1 = torch.utils.data.TensorDataset(test_data_tensor_1, torch.ones(5790, 1))
-    print(test_data_tensor_1.size())
+    #test_dataset_1 = torch.utils.data.TensorDataset(test_data_tensor_1, torch.ones(5790, 1))
+    #print(test_data_tensor_1.size())
 
     # 创建数据加载器
     batch_size = 16 # 定义你的小批量大小
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
-    test_loader_1 = torch.utils.data.DataLoader(test_dataset_1, batch_size=5790, shuffle=False)
+    #test_loader_1 = torch.utils.data.DataLoader(test_dataset_1, batch_size=5790, shuffle=False)
 
     criterion = nn.CrossEntropyLoss()
 
@@ -227,7 +227,7 @@ if __name__ == '__main__':
     net = NetLinear();
     train_net(net, train_loader, test_loader)
 
-    
+    """
     predicted_labels = {}
     for i, (data, labels) in enumerate(test_loader_1):
         outputs = net(data)
@@ -237,7 +237,7 @@ if __name__ == '__main__':
 
     with open('predicted_labels.json', 'w') as file:
         json.dump(list(predicted_labels.values()), file)
-
+    """
 
 
 
